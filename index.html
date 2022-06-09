@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhiteBoard!</title>
+    <style>
+        body{
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            background-color: rgb(3, 3, 24);
+        }
+
+        .container{
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            border: 4px solid black;
+            width: 100%;
+            height: 97vh;
+            background: white;
+            overflow: hidden;
+        }
+
+        .container #colors{
+            position: absolute;
+            border-radius: 1rem;
+            border: 3px solid black;
+            display: flex;
+            place-items: center;
+            background-color: lightgrey;
+            bottom: -4.8rem;
+            padding: 1rem;
+            transition: bottom 1s;
+            z-index: 999;
+        }
+
+        .container #colors:hover,
+        .container #colors:hover .color:hover{
+            bottom: .1rem;
+        }
+
+        .container #colors .color{
+            appearance: none;
+            margin: auto .5rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #colors .color:nth-child(1){
+            background-color: red;
+            border: none;
+        }
+        #colors .color:nth-child(2){
+            background-color: green;
+            border: none;
+        }
+        #colors .color:nth-child(3){
+            background-color: blue;
+            border: none;
+        }
+        #colors .color:nth-child(4){
+            background-color: black;
+            border: none;
+        }
+        #colors .color:nth-child(5){
+            background-color: orangered;
+            border: none;
+        }
+        #colors .color:nth-child(6){
+            background-color: yellow;
+            border: none;
+        }
+        #colors .color:nth-child(7){
+            border: none;
+            background-image: url(./images/clear.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .point{
+            position: absolute;
+            border-radius: 50%;
+            border: 0;
+            appearance: none;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="colors">
+            <button class="color" data-color="red"></button>
+            <button class="color" data-color="green"></button>
+            <button class="color" data-color="blue"></button>
+            <button class="color" data-color="black"></button>
+            <button class="color" data-color="orangered"></button>
+            <button class="color" data-color="yellow"></button>
+            <button class="color" data-color="clear"></button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        const board = document.querySelector('.container')
+        let changeColor = document.querySelector('#colors')
+        let color = `green`
+        let size = 10
+
+        const createDrawing = (x, y) => {
+            console.log(color)
+            const point = document.createElement('i')
+            point.className = 'point'
+            point.style.top = `${y}px`
+            point.style.left = `${x}px`
+            point.style.backgroundColor = color
+            point.style.width = `${size}px`
+            point.style.height = `${size}px`
+
+            return point;
+        }
+
+        const draw = (e) => {
+            const { clientX, clientY } = e
+            board.appendChild(createDrawing(clientX-10, clientY-12))
+        }
+
+        board.addEventListener('mousedown', e => {
+            board.addEventListener('mousemove', draw)
+        })
+
+        board.addEventListener('mouseup', e => {
+            board.removeEventListener('mousemove', draw)
+        })
+
+        changeColor.addEventListener('click', e => {
+            const newColor = e.target.dataset
+            
+            if(newColor){
+                if(newColor.color !== 'clear'){
+                    color = newColor.color
+                    size = 10
+                }
+                else{
+                    color = 'white';
+                    size = 20
+                }
+            }
+        })
+    </script>
+</body>
+</html>

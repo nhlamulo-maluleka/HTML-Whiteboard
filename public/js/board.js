@@ -39,7 +39,7 @@ changeColor.addEventListener('click', e => {
         }
         else if(newColor.color === 'erase'){
             color = 'white';
-            size = 20
+            size = 30
         } else {
             board.innerHTML = ''
         }

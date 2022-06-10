@@ -57,6 +57,8 @@ changeColor.addEventListener('click', e => {
             color = 'white';
             size = 30
         } else {
+            color = color;
+            size = 10
             board.innerHTML = ''
         }
     }

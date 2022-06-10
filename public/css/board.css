@@ -99,11 +99,17 @@ html, body{
 }
 
 @media only screen and (max-width: 600px) {
-    /* body{
-        overflow-y: auto;
-    } */
+    #colors .color{
+        width: 2rem;
+        height: 2rem;
+    }
 
     #colors{
-        bottom: .5rem;
+        bottom: 0rem;
+    }
+
+    #colors:hover,
+    #colors:hover .color:hover{
+        bottom: 1rem;
     }
 }

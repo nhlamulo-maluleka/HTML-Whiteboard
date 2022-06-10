@@ -100,6 +100,6 @@ html, body{
 
 @media only screen and (max-width: 600px) {
     #colors{
-        bottom: -3.3rem;
+        bottom: -2rem;
     }
 }

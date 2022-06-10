@@ -1,10 +1,9 @@
 const board = document.querySelector('.container')
 let changeColor = document.querySelector('#colors')
-let color = `green`
+let color = `#000`
 let size = 10
 
 const createDrawing = (x, y) => {
-    console.log(color)
     const point = document.createElement('i')
     point.className = 'point'
     point.style.top = `${y}px`
@@ -17,17 +16,34 @@ const createDrawing = (x, y) => {
 }
 
 const draw = (e) => {
-    const { clientX, clientY } = e
-    board.appendChild(createDrawing(clientX-10, clientY-12))
+    let xCoord = 0;
+    let yCoord = 0;
+
+    if("ontouchstart" in document.documentElement){
+        const { changedTouches } = e
+        const { clientX, clientY } = changedTouches[0]
+        xCoord = clientX-3
+        yCoord = clientY-3
+    } else {
+        const { clientX, clientY } = e
+        xCoord = clientX-10
+        yCoord = clientY-12
+    }
+
+    board.appendChild(createDrawing(xCoord, yCoord))
 }
 
-board.addEventListener('mousedown', e => {
-    board.addEventListener('mousemove', draw)
-})
-
-board.addEventListener('mouseup', e => {
-    board.removeEventListener('mousemove', draw)
-})
+if("ontouchstart" in document.documentElement){
+    board.addEventListener("touchmove", draw)
+} else {
+    board.addEventListener('mousedown', e => {
+        board.addEventListener('mousemove', draw)
+    })
+    
+    board.addEventListener('mouseup', e => {
+        board.removeEventListener('mousemove', draw)
+    })
+}
 
 changeColor.addEventListener('click', e => {
     const newColor = e.target.dataset

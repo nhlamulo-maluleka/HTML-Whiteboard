@@ -97,3 +97,9 @@ html, body{
     appearance: none;
     overflow: hidden;
 }
+
+@media only screen and (max-width: 600px) {
+    #colors{
+        bottom: -3.3rem;
+    }
+}

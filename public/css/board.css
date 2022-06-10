@@ -99,11 +99,11 @@ html, body{
 }
 
 @media only screen and (max-width: 600px) {
-    body{
+    /* body{
         overflow-y: auto;
-    }
-    
+    } */
+
     #colors{
-        bottom: -2rem;
+        bottom: .5rem;
     }
 }
